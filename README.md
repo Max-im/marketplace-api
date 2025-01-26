@@ -9,7 +9,6 @@
 - TypeScript
 - Swagger
 
-
 ## Development
 - Clone this repository in the current folder:
   ```sh
@@ -22,28 +21,27 @@
   nvm use 20
   ```
 
-- use `.env.sample` to create `.env` file with an appropriate variables
+- Use `.env.sample` to create `.env` file with appropriate variables. If you don't provide `.env`, the App's database will work in memory.
 - Run the command:
   ```sh
   npm run dev
   ```
 
-
 ## Testing
-- Run the App localy (See the Development section)
-- Open `http://localhost:3000/api-docs` in your browser to see the App available endpoints in swagger;
+- Run the App locally (See the Development section)
+- Open `http://localhost:3000/api-docs` in your browser to see the App available endpoints in Swagger.
 
 ## Description
-There are 3 mongoDB collections:
+There are 3 MongoDB collections:
  - items
  - rents
  - history
 
 ### Items collection:
-contains the items can be rented any user can create an item to rent with the `name`, `description` and `price` fields
+Contains the items that can be rented. Any user can create an item to rent with the `name`, `description`, and `price` fields.
 
 ### Rents collection:
-contains the items already rented, once item is rented it can not be searched
+Contains the items already rented. Once an item is rented, it cannot be searched.
 
 ### History collection:
-contains renting history, once a user return an item, it removes from the renting collection and store into the history collection. The approach ensure the `rents` collection not to become too large to make a database request.
+Contains renting history. Once a user returns an item, it is removed from the renting collection and stored in the history collection. This approach ensures the `rents` collection does not become too large, making database requests more efficient.
