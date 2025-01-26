@@ -13,7 +13,7 @@ class HistoryRepository {
     async store(rent: IRentResponse) {
         try {
             await this.client.insertOne({
-                _id: new ObjectId(rent.rentId),
+                rent_id: new ObjectId(rent.rentId),
                 item_id: new ObjectId(rent.itemId),
                 start_date: rent.startDate,
                 end_date: rent.endDate,

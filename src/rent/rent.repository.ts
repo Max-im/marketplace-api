@@ -72,12 +72,22 @@ class RentRepository {
         } 
     }
     
-    async delete(rentId: string) {
+    async delete(itemId: string) {
         try {
-            return await this.client.deleteOne({ rent_id: new ObjectId(rentId) });
+            const response = await this.client.findOneAndDelete({ item_id: new ObjectId(itemId) });
+            if (!response) {
+                return new ErrorMessage('Rent not found');
+            }
+            const rent = this.IRentEntity({
+                _id: response._id,
+                item_id: response.item_id,
+                start_date: response.start_date,
+                end_date: response.end_date
+            });
+            return new SuccessMessage<IRentResponse>(rent);
         } catch (e) {
             console.log(e);
-            return new ErrorMessage('Delete rent error: ' + rentId );
+            return new ErrorMessage('Delete rent error: ' + itemId );
         } 
     }
 }

@@ -1,7 +1,6 @@
 import { IRentItemDto } from "../item";
 import { ErrorMessage } from "../messages";
 import rentRepository from "./rent.repository";
-import { IRentResponse } from "./rent.type";
 
 class RentService {
     async rentItem(dto: IRentItemDto) {
@@ -17,13 +16,7 @@ class RentService {
     }
     
     async returnItem(itemId: string) {
-        const rent = await rentRepository.getRentByItemId(itemId);
-        if (rent.error || !rent.payload) {
-            return rent as ErrorMessage;
-        }
-        const rentData = rent.payload as IRentResponse;
-        await rentRepository.delete(rentData.rentId);
-        return rent;
+        return await rentRepository.delete(itemId);
     }
 }
 
