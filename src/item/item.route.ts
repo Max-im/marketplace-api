@@ -9,23 +9,21 @@ const router = Router();
  * @swagger
  * /item:
  *   post:
+ *     tags: [Item]
  *     summary: List a new item for rent
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               description:
- *                 type: string
- *               price:
- *                 type: number
+ *             $ref: '#/components/schemas/ItemRequest'
  *     responses:
  *       201:
  *         description: Item listed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ItemResponse'
  *       400:
  *         description: Missing required fields
  */
@@ -35,6 +33,7 @@ router.post('/item', validator.createItem, asyncHandler(controller.createItem));
  * @swagger
  * /item:
  *   get:
+ *     tags: [Item]
  *     summary: Search for available items
  *     parameters:
  *       - in: query
@@ -55,6 +54,12 @@ router.post('/item', validator.createItem, asyncHandler(controller.createItem));
  *     responses:
  *       200:
  *         description: List of available items
+ *         content:
+ *           application/json:
+ *             schema: 
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/ItemResponse'
  */
 router.get('/item', validator.getItems, asyncHandler(controller.getItems));
 
@@ -62,6 +67,7 @@ router.get('/item', validator.getItems, asyncHandler(controller.getItems));
  * @swagger
  * /item/{id}/rent:
  *   post:
+ *     tags: [Item]
  *     summary: Rent an item for a specific date range
  *     parameters:
  *       - in: path
@@ -75,17 +81,14 @@ router.get('/item', validator.getItems, asyncHandler(controller.getItems));
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               startDate:
- *                 type: string
- *                 format: date
- *               endDate:
- *                 type: string
- *                 format: date
+ *             $ref: '#/components/schemas/RentRequest'
  *     responses:
  *       200:
  *         description: Item rented successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RentResponse'
  *       400:
  *         description: Missing fields or date conflict
  *       404:
@@ -97,6 +100,7 @@ router.post('/item/:id/rent', validator.isValidId, validator.rentItem, asyncHand
  * @swagger
  * /item/{id}/return:
  *   post:
+ *     tags: [Item]
  *     summary: Return a rented item
  *     parameters:
  *       - in: path
@@ -108,6 +112,10 @@ router.post('/item/:id/rent', validator.isValidId, validator.rentItem, asyncHand
  *     responses:
  *       200:
  *         description: Item returned successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RentResponse'
  *       404:
  *         description: Item not found
  */

@@ -1,4 +1,6 @@
 import swaggerJsDoc from 'swagger-jsdoc';
+import { itemRequestSchema, itemResponseSchema } from './schema/item';
+import { rentRequestSchema, rentResponseSchema } from './schema/rent';
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -8,12 +10,20 @@ const swaggerOptions = {
             description: 'API documentation for the peer-to-peer rental platform',
             version: '1.0.0',
         },
-        servers: [
+        tags: [
             {
-                url: 'http://localhost:3000',
-                description: 'Local server',
+                name: 'Item',
+                description: 'Item endpoints',
             },
         ],
+        components: {
+            schemas: {
+                ItemResponse: itemResponseSchema,
+                ItemRequest: itemRequestSchema,
+                RentResponse: rentResponseSchema,
+                RentRequest: rentRequestSchema,
+            },
+        },
     },
     apis: ['./src/item/item.route.ts'],
 };
