@@ -1,0 +1,38 @@
+# Ignore node_modules (these will be installed inside the container)
+node_modules
+
+# Ignore local development files
+*.log
+*.env
+.DS_Store
+
+# Ignore test files and coverage reports
+tests/
+__tests__/
+coverage/
+
+# Ignore temporary and system files
+tmp/
+*.tmp
+*.swp
+
+# Ignore build files
+dist/
+build/
+
+# Ignore Git-related files
+.git/
+.gitignore
+
+# Ignore Docker-related files (only if not needed in the image)
+docker-compose.yml
+*.dockerignore
+
+# Ignore IDE/editor configurations
+.vscode/
+.idea/
+*.code-workspace
+
+# Ignore other OS or editor-specific files
+Thumbs.db
+*.bak
