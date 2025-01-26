@@ -17,7 +17,7 @@ async function getApplication() {
     .catch(console.error);
     
     app.use(express.json());
-      app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+      app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
     app.use(itemRouter);
 
     app.all('*', (req, res) => {
