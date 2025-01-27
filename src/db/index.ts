@@ -8,6 +8,9 @@ let memoryServer: MongoMemoryServer | null = null;
 const dbName = 'marketplaceDb';
 
 export async function connect(): Promise<string> {
+    console.log('----------------------------------------------------')
+    console.log(process.env.DATABASE_URL)
+    console.log('----------------------------------------------------')
     if (process.env.DATABASE_URL) {
         mongoClient = new MongoClient(process.env.DATABASE_URL);
         await mongoClient.connect();
