@@ -26,6 +26,7 @@ const swaggerOptions = {
         },
     },
     apis: ['./src/item/item.route.ts'],
+    exposeRoute: true,
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
