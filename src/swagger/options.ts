@@ -25,7 +25,7 @@ const swaggerOptions = {
             },
         },
     },
-    apis: ['./src/item/item.route.ts'],
+    apis: process.env.NODE_ENV === 'production' ? ['./dist/**/*.js'] : ['./src/**/*.ts'],
     exposeRoute: true,
 };
 
